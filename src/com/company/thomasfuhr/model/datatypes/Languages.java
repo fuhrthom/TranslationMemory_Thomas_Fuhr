@@ -1,4 +1,4 @@
-package com.company.thomasfuhr.datatypes;
+package com.company.thomasfuhr.model.datatypes;
 
 import java.util.ArrayList;
 import java.util.HashMap;

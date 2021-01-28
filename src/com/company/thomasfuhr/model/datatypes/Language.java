@@ -1,6 +1,4 @@
-package com.company.thomasfuhr.datatypes;
-
-import java.util.UUID;
+package com.company.thomasfuhr.model.datatypes;
 
 public class Language {
 

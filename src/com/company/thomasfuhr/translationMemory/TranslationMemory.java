@@ -1,7 +1,7 @@
 package com.company.thomasfuhr.translationMemory;
 
-import com.company.thomasfuhr.database.Database;
-import com.company.thomasfuhr.datatypes.Language;
+import com.company.thomasfuhr.model.database.Database;
+import com.company.thomasfuhr.model.datatypes.Language;
 import com.company.thomasfuhr.usertypes.Admin;
 import com.company.thomasfuhr.usertypes.Translator;
 import com.company.thomasfuhr.view.View;

@@ -1,6 +1,6 @@
-package com.company.thomasfuhr.database;
+package com.company.thomasfuhr.model.database;
 
-import com.company.thomasfuhr.datatypes.*;
+import com.company.thomasfuhr.model.datatypes.*;
 import com.company.thomasfuhr.usertypes.Admin;
 import com.company.thomasfuhr.usertypes.Translator;
 import com.github.cliftonlabs.json_simple.JsonArray;

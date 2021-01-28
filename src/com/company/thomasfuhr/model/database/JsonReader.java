@@ -1,8 +1,8 @@
-package com.company.thomasfuhr.database;
+package com.company.thomasfuhr.model.database;
 
-import com.company.thomasfuhr.datatypes.Languages;
-import com.company.thomasfuhr.datatypes.LinkedWords;
-import com.company.thomasfuhr.datatypes.Words;
+import com.company.thomasfuhr.model.datatypes.Languages;
+import com.company.thomasfuhr.model.datatypes.LinkedWords;
+import com.company.thomasfuhr.model.datatypes.Words;
 import com.company.thomasfuhr.usertypes.Translator;
 import com.google.gson.Gson;
 

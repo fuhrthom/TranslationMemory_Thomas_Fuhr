@@ -1,7 +1,7 @@
-package com.company.thomasfuhr.database;
+package com.company.thomasfuhr.model.database;
 
-import com.company.thomasfuhr.datatypes.LinkedWords;
-import com.company.thomasfuhr.datatypes.Word;
+import com.company.thomasfuhr.model.datatypes.LinkedWords;
+import com.company.thomasfuhr.model.datatypes.Word;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 

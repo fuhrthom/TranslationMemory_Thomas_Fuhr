@@ -1,6 +1,6 @@
 package com.company.thomasfuhr.view;
 
-import com.company.thomasfuhr.database.Database;
+import com.company.thomasfuhr.model.database.Database;
 
 import java.io.BufferedReader;
 import java.io.IOException;
