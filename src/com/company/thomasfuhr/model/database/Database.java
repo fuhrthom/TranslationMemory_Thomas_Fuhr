@@ -58,7 +58,7 @@ public class Database {
             nextID += 1;
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
 
-            System.err.println(indexOutOfBoundsException.getMessage());
+            // index out ouf bounds exception -> return 1 because no entry was there
         }
 
         // if the iterator could be created, the value is != 1, if not this value is 1
@@ -257,7 +257,7 @@ public class Database {
             wordsCreated += 1;
             // if success, write word into linked.json with language german
             // return success
-            return JsonWriter.writeWordToLinkedFileWithGermanLanguage(wordsAndWord.getWord(), linkedWords);
+            return JsonWriter.writeWordToLinkedFileWithGermanLanguage(wordsAndWord.getWord());
         }
 
         return false;
@@ -487,6 +487,9 @@ public class Database {
 
     public ArrayList<Integer[]> getWord(String wordToFind) {
 
+        // capitalize first letter
+        wordToFind = wordToFind.substring(0, 1).toUpperCase() + wordToFind.substring(1).toLowerCase();
+
         // try reading existing file from system
         try {
 
@@ -517,7 +520,6 @@ public class Database {
             }
         } catch (IOException e) {
 
-            System.err.println(e.getMessage());
             // no file found
         }
 
@@ -528,6 +530,8 @@ public class Database {
 
     public ArrayList<ArrayList<Integer[]>> getWordsWithMissingTranslations() {
 
+        ArrayList<ArrayList<Integer[]>> wordsWithMissingTranslation = new ArrayList<>();
+
         // try read existing languages, words and linked words
         try {
 
@@ -537,9 +541,11 @@ public class Database {
         } catch(IOException e) {
 
             // one file could not be read
+            // return empty array because there are no words
+            return wordsWithMissingTranslation;
         }
 
-        ArrayList<ArrayList<Integer[]>> wordsWithMissingTranslation = new ArrayList<>();
+
 
         // go through every wordgroup
         for (ArrayList<ArrayList<Integer[]>> wordgroup : linkedWords.linkedWords) {

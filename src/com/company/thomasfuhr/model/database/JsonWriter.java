@@ -76,8 +76,9 @@ public class JsonWriter {
         }
     }
 
-    public static boolean writeWordToLinkedFileWithGermanLanguage(Word word, LinkedWords linkedWords) {
+    public static boolean writeWordToLinkedFileWithGermanLanguage(Word word) {
 
+        LinkedWords linkedWords;
         try {
 
             // try reading exsisting file from system, if failing, catch block will be executed

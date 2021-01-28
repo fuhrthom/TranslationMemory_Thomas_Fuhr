@@ -193,7 +193,7 @@ public class View {
         // create bufferedReader to handle userinput
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.err.println("Your word was not found. If you want to create it, enter \"create\". To go back enter anything else.");
+        System.err.println("Your word was not found. If you want to create it, enter \"create\" (You can only create words with letters in your language. Numbers and Symbols are not allowed). To go back enter anything else.");
 
         return br.readLine();
     }
@@ -263,5 +263,20 @@ public class View {
     public static void showTranslationAlreadyExist() {
 
         System.err.println("-----This translation already exists.-----");
+    }
+
+    public static void showRegexNotMatching() {
+
+        System.err.println("-----You can only create words with letters in your language. Numbers and Symbols are not allowed.-----");
+    }
+
+    public static void showNoWordsWithMissingTranslationFound() {
+
+        System.err.println("-----No words with missing translation could be found.-----");
+    }
+
+    public static void showAdminLanguageDoesNotExist() {
+
+        System.err.println("-----Your language could not be found. Please try again and make sure spell it correct.-----");
     }
 }

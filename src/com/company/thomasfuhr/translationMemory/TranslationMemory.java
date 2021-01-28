@@ -8,6 +8,7 @@ import com.company.thomasfuhr.view.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class TranslationMemory {
 
@@ -92,6 +93,9 @@ public class TranslationMemory {
 
     private void handleSearchWordMask(String wordToSearch) throws IOException {
 
+        // capitalize first letter
+        wordToSearch = wordToSearch.substring(0, 1).toUpperCase() + wordToSearch.substring(1);
+
         ArrayList<Integer[]> linkedWord = Database.getInstance().getWord(wordToSearch);
 
         // word could be found
@@ -111,15 +115,27 @@ public class TranslationMemory {
 
         if (userInputAfterNotFound.equals("create")) {
 
-            // add word
-            if (Database.getInstance().createWord(searchedWord)) {
+            // capitalize first letter
+            searchedWord = searchedWord.substring(0, 1).toUpperCase() + searchedWord.substring(1);
 
-                View.showSuccess();
-                // add languages to linked words list
-                Database.getInstance().addLanguagesToLinkedWords();
-            } else {
+            // check if searchedWord matches the regex expression
+            if(Pattern.matches("^\\p{L}+$", searchedWord)) {
 
-                View.showError();
+                // add word
+                if (Database.getInstance().createWord(searchedWord)) {
+
+                    View.showSuccess();
+                    // add languages to linked words list
+                    Database.getInstance().addLanguagesToLinkedWords();
+                } else {
+
+                    View.showError();
+                }
+            }
+            // searchedWord does not match regex
+            else {
+
+                View.showRegexNotMatching();
             }
         }
 
@@ -142,7 +158,11 @@ public class TranslationMemory {
         // admin wants to add a language
         if (i == 1) {
 
-            Language language = new Language(View.showAddLanguageMask());
+            String languageToAdd = View.showAddLanguageMask();
+            // capitalize first letter
+            languageToAdd = languageToAdd.substring(0, 1).toUpperCase() + languageToAdd.substring(1).toLowerCase();
+
+            Language language = new Language(languageToAdd);
 
             //language could not be added
             if (!Database.getInstance().addLanguage(language)) {
@@ -166,7 +186,11 @@ public class TranslationMemory {
         // admin wants to search word and show translation
         else if (i == 2) {
 
-            ArrayList<Integer[]> linkedWord = Database.getInstance().getWord(View.showSearchWordMask());
+            String wordToSearch = View.showSearchWordMask();
+            // capitalize first letter
+            wordToSearch = wordToSearch.substring(0, 1).toUpperCase() + wordToSearch.substring(1).toLowerCase();
+
+            ArrayList<Integer[]> linkedWord = Database.getInstance().getWord(wordToSearch);
 
             if (linkedWord != null) {
 
@@ -195,10 +219,23 @@ public class TranslationMemory {
 
         if (input.equals("add")) {
 
-            // admin wants do add language to translator
-            if (Database.getInstance().addLanguageToTranslator(View.showAddLanguageToTranslatorMask(Database.getInstance().getLanguagesAsStrings()))) {
+            String adminInputLanguage = View.showAddLanguageToTranslatorMask(Database.getInstance().getLanguagesAsStrings());
 
-                View.showSuccess();
+            // capitalize first letter
+            adminInputLanguage = adminInputLanguage.substring(0, 1).toUpperCase() + adminInputLanguage.substring(1).toLowerCase();
+
+            // check if admin input language does exist
+            if(Database.getInstance().getLanguagesAsStrings().contains(adminInputLanguage)) {
+
+                if (Database.getInstance().addLanguageToTranslator(adminInputLanguage)) {
+
+                    View.showSuccess();
+                }
+            }
+            // adminInputLanguage does not exist
+            else {
+
+                View.showAdminLanguageDoesNotExist();
             }
         }
 
@@ -219,23 +256,42 @@ public class TranslationMemory {
 
             // show translated words count
             View.showTranslatedWords(Database.getInstance().getTranslatedWordsCount());
+            handleTranslatorMenu(View.showTranslatorMask());
         }
         // translator wants to show words with missing translations
         else if (i == 3) {
 
             // save all words with missing translations into variable and create new array with translation percents of words
             ArrayList<ArrayList<Integer[]>> wordsWithMissingTranslations = Database.getInstance().getWordsWithMissingTranslations();
-            Integer[] percents = calculatePercentsArray(wordsWithMissingTranslations);
 
-            // show words with missing translation
-            String translatorInput = View.showWordsWithMissingTranslations(wordsWithMissingTranslations, percents);
+            // if there are words with missing translations
+            if(wordsWithMissingTranslations.size() != 0) {
 
-            // if word did exist
-            if (doesWordExist(wordsWithMissingTranslations, translatorInput)) {
+                Integer[] percents = calculatePercentsArray(wordsWithMissingTranslations);
 
-                // start translation
-                translateWord(translatorInput);
+                // show words with missing translation
+                String translatorInput = View.showWordsWithMissingTranslations(wordsWithMissingTranslations, percents);
+
+                if (translatorInput.length() > 3) {
+
+                    // capitalize first letter
+                    translatorInput = translatorInput.substring(0, 1).toUpperCase() + translatorInput.substring(1).toLowerCase();
+
+                    // if word did exist
+                    if (doesWordExist(wordsWithMissingTranslations, translatorInput)) {
+
+                        // start translation
+                        translateWord(translatorInput);
+                    }
+                }
             }
+            // no words with missing translation found
+            else {
+
+                View.showNoWordsWithMissingTranslationFound();
+            }
+
+            handleTranslatorMenu(View.showTranslatorMask());
         }
         // translator wants to show count of all words
         else if (i == 4) {
@@ -328,6 +384,9 @@ public class TranslationMemory {
         // show "foundWordMask" with translator output, and save translator input into String object
         String enteredLanguage = View.showEnterLanguage();
 
+        // capitalize first letter
+        enteredLanguage = enteredLanguage.substring(0, 1).toUpperCase() + enteredLanguage.substring(1).toLowerCase();
+
         // check if translator input does exsist in languages
         if (Database.getInstance().getLanguagesAsStrings().contains(enteredLanguage)) {
 
@@ -338,9 +397,13 @@ public class TranslationMemory {
                 // check if translator has language permission
                 if (Database.getInstance().getTranslatorLanguages().contains(Database.getInstance().getLanguageID(enteredLanguage))) {
 
+                    String translationOfWord = View.showTypeTranslatedWordMask(translatorInput);
+                    // capitalize first letter
+                    translationOfWord = translationOfWord.substring(0, 1).toUpperCase() + translationOfWord.substring(1).toLowerCase();
+
                     // if permissions are there, add translation word
                     // if it worked, show success, if not show error
-                    if (Database.getInstance().addTranslatedWord(translatorInput, enteredLanguage, View.showTypeTranslatedWordMask(translatorInput))) {
+                    if (Database.getInstance().addTranslatedWord(translatorInput, enteredLanguage, translationOfWord)) {
 
                         // translation could be added
                         View.showSuccess();
