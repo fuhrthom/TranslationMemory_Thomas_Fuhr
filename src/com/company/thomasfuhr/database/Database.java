@@ -286,6 +286,7 @@ public class Database {
             // go thorugh every word
             for (ArrayList<Integer[]> word : wordgroups) {
 
+                // check if word is equal to the german word
                 if(getWordString(word.get(0)[0]).equals(germanWord)) {
 
                     // go thorugh the translations
@@ -298,7 +299,7 @@ public class Database {
                             // remove the object in this array with no word paired to langauge
                             word.remove(translation);
                             // add new object with translated word paired to language
-                            word.add(new Integer[]{ getWordID(translationOfWord), getLanguageID(translatedLanguage) } );
+                            word.add(new Integer[]{ getWordID(translationOfWord), getLanguageID(translatedLanguage) });
 
                             // add translation to translation count of translator and save to file
                             wordsTranslated += 1;
