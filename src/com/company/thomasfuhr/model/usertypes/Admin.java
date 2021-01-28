@@ -1,4 +1,4 @@
-package com.company.thomasfuhr.usertypes;
+package com.company.thomasfuhr.model.usertypes;
 
 public class Admin {
 

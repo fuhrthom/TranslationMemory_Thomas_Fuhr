@@ -3,7 +3,7 @@ package com.company.thomasfuhr.model.database;
 import com.company.thomasfuhr.model.datatypes.Languages;
 import com.company.thomasfuhr.model.datatypes.LinkedWords;
 import com.company.thomasfuhr.model.datatypes.Words;
-import com.company.thomasfuhr.usertypes.Translator;
+import com.company.thomasfuhr.model.usertypes.Translator;
 import com.google.gson.Gson;
 
 import java.io.IOException;

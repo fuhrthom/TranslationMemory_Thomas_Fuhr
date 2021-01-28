@@ -1,9 +1,9 @@
-package com.company.thomasfuhr.translationMemory;
+package com.company.thomasfuhr.controller;
 
 import com.company.thomasfuhr.model.database.Database;
 import com.company.thomasfuhr.model.datatypes.Language;
-import com.company.thomasfuhr.usertypes.Admin;
-import com.company.thomasfuhr.usertypes.Translator;
+import com.company.thomasfuhr.model.usertypes.Admin;
+import com.company.thomasfuhr.model.usertypes.Translator;
 import com.company.thomasfuhr.view.View;
 
 import java.io.IOException;
