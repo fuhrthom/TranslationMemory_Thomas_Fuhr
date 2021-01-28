@@ -279,4 +279,9 @@ public class View {
 
         System.err.println("-----Your language could not be found. Please try again and make sure spell it correct.-----");
     }
+
+    public static void showLanguageAlreadyExists() {
+
+        System.err.println("-----Language already exists.-----");
+    }
 }

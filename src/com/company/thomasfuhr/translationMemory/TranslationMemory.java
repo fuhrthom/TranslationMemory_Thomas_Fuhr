@@ -164,20 +164,30 @@ public class TranslationMemory {
 
             Language language = new Language(languageToAdd);
 
-            //language could not be added
-            if (!Database.getInstance().addLanguage(language)) {
+            // check if database already contains langauge
+            if (!Database.getInstance().getLanguagesAsStrings().contains(language.getLanguage())) {
 
-                // show user failure message
-                View.showError();
+                //language could not be added
+                if (!Database.getInstance().addLanguage(language)) {
+
+                    // show user failure message
+                    View.showError();
+                }
+                //language could be added
+                else {
+
+                    // show user success message
+                    View.showSuccess();
+
+                    // add languages to linked words list
+                    Database.getInstance().addLanguagesToLinkedWords();
+                }
             }
-            //language could be added
+            // database contains language
             else {
 
-                // show user success message
-                View.showSuccess();
-
-                // add languages to linked words list
-                Database.getInstance().addLanguagesToLinkedWords();
+                View.showError();
+                View.showLanguageAlreadyExists();
             }
 
             // go back to menu
@@ -227,10 +237,19 @@ public class TranslationMemory {
             // check if admin input language does exist
             if(Database.getInstance().getLanguagesAsStrings().contains(adminInputLanguage)) {
 
-                if (Database.getInstance().addLanguageToTranslator(adminInputLanguage)) {
+                // check if translator has already this language
+                if (!Database.getInstance().getTranslatorLanguages().contains(Database.getInstance().getLanguageID(adminInputLanguage))) {
 
-                    View.showSuccess();
+                    if (Database.getInstance().addLanguageToTranslator(adminInputLanguage)) {
+
+                        View.showSuccess();
+                    }
+                } else {
+
+                    View.showError();
+                    View.showLanguageAlreadyExists();
                 }
+
             }
             // adminInputLanguage does not exist
             else {
