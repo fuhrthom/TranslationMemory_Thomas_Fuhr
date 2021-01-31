@@ -8,6 +8,7 @@ import com.company.thomasfuhr.view.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 public class TranslationMemory {
@@ -229,7 +230,21 @@ public class TranslationMemory {
 
         if (input.equals("add")) {
 
-            String adminInputLanguage = View.showAddLanguageToTranslatorMask(Database.getInstance().getLanguagesAsStrings());
+            // get langauges which are not in translator
+            Collection<String> languagesInDatabase = Database.getInstance().getLanguagesAsStrings();
+            ArrayList<Integer> translatorLanguages = Database.getInstance().getTranslatorLanguages();
+
+            ArrayList<String> missingLanguagePermissions = new ArrayList<>();
+
+            for (String language : languagesInDatabase) {
+
+                if(!translatorLanguages.contains(Database.getInstance().getLanguageID(language))) {
+
+                    missingLanguagePermissions.add(language);
+                }
+            }
+
+            String adminInputLanguage = View.showAddLanguageToTranslatorMask(missingLanguagePermissions);
 
             // capitalize first letter
             adminInputLanguage = adminInputLanguage.substring(0, 1).toUpperCase() + adminInputLanguage.substring(1).toLowerCase();
@@ -416,7 +431,7 @@ public class TranslationMemory {
                 // check if translator has language permission
                 if (Database.getInstance().getTranslatorLanguages().contains(Database.getInstance().getLanguageID(enteredLanguage))) {
 
-                    String translationOfWord = View.showTypeTranslatedWordMask(translatorInput);
+                    String translationOfWord = View.showTypeTranslatedWordMask(enteredLanguage);
                     // capitalize first letter
                     translationOfWord = translationOfWord.substring(0, 1).toUpperCase() + translationOfWord.substring(1).toLowerCase();
 

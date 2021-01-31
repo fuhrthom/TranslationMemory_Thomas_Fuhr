@@ -14,12 +14,19 @@ public class View {
 
         // create bufferedReader to handle userinput
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter \"1\" to open translation section, \"2\" to see your createdWords count, \"3\" to see the count of all words, \"4\" to open login-mask or anything else to exit the programm.");
+
+        System.out.println("\n-----Main Menu-----");
+        System.out.println();
+        System.out.println("Enter \"1\" to open translation section,\n\"" +
+                "2\" to see your createdWords count,\n" +
+                "\"3\" to see the count of all words,\n" +
+                "\"4\" to open login-mask " +
+                "\nor anything else to exit the programm.");
 
         try {
 
             // parse input value to integer and return
-            return Integer.parseInt(br.readLine());
+            return Integer.parseInt(br.readLine().replaceAll("\\s+",""));
         } catch (NumberFormatException nfe) {
 
             // terminate the programm
@@ -34,15 +41,18 @@ public class View {
         // create bufferedReader to handle userinput
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Enter \"1\" to open translation section, " +
-                "\"2\" to see your translated words count, " +
-                "\"3\" to see all words with missing translation, " +
-                "\"4\" to show the count of all words or anything else to go back.");
+        System.out.println("\n-----Translator Menu-----");
+        System.out.println();
+        System.out.println("Enter \"1\" to open translation section,\n" +
+                "\"2\" to see your translated words count,\n" +
+                "\"3\" to see all words with missing translation,\n" +
+                "\"4\" to show the count of all words \n" +
+                "or anything else to go back.");
 
         try {
 
             // parse input value to integer and return
-            return Integer.parseInt(br.readLine());
+            return Integer.parseInt(br.readLine().replaceAll("\\s+",""));
         } catch (NumberFormatException e) {
 
             // terminate the programm
@@ -54,12 +64,18 @@ public class View {
 
         // create bufferedReader to handle userinput
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter \"1\" to add a language, \"2\" to search a word and show the translations, \"3\" to add a language to translator or anything else to go back to main menu.");
+
+        System.out.println("\n-----Admin Menu-----");
+        System.out.println();
+        System.out.println("Enter \"1\" to add a language,\n" +
+                "\"2\" to search a word and show the translations,\n" +
+                "\"3\" to add a language to translator \n" +
+                "or anything else to go back to main menu.");
 
         try {
 
             // parse input value to integer and return
-            return Integer.parseInt(br.readLine());
+            return Integer.parseInt(br.readLine().replaceAll("\\s+",""));
         } catch (NumberFormatException | IOException nfe) {
 
             return 0;
@@ -73,7 +89,7 @@ public class View {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter username:");
-        String username = br.readLine();
+        String username = br.readLine().replaceAll("\\s+","");
 
         System.out.println("Enter password:");
         String password = br.readLine();
@@ -89,7 +105,7 @@ public class View {
 
         System.err.println("Wrong username or password! Type \"t\" to try again or anything else to go back.");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showAddLanguageMask() throws IOException {
@@ -99,7 +115,7 @@ public class View {
 
         System.out.println("Enter the language you want to add:");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showLanguagesFromTranslator(ArrayList<String> languagesFromTranslator) throws IOException {
@@ -110,7 +126,7 @@ public class View {
         System.out.println("The following languages are already in translator: " + languagesFromTranslator);
         System.out.println("Type \"add\" if you want to add an language to translator or anything else to go back.");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showAddLanguageToTranslatorMask(Collection<String> languages) throws IOException {
@@ -120,7 +136,7 @@ public class View {
 
         System.out.println("Enter the language to be added to translator (" + languages + ") or exit to go back to menu:");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showSearchWordMask() throws IOException {
@@ -130,7 +146,7 @@ public class View {
 
         System.out.println("Enter the word you want to search:");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showWordsWithMissingTranslations(ArrayList<ArrayList<Integer[]>> wordsWithMissingTranslations, Integer[] percents) throws IOException {
@@ -165,7 +181,7 @@ public class View {
 
         System.out.println("\nTo Translate a word, type the word. Enter anything to go back.\n");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showEnterLanguage() throws IOException {
@@ -175,7 +191,7 @@ public class View {
 
         System.out.println("Enter the language you want to add:");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showTypeTranslatedWordMask(String translatorInput) throws IOException {
@@ -185,7 +201,7 @@ public class View {
 
         System.out.println("Enter the word in " + translatorInput + ". It will be added.");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
     public static String showNotFoundWord() throws IOException {
@@ -195,7 +211,7 @@ public class View {
 
         System.err.println("Your word was not found. If you want to create it, enter \"create\" (You can only create words with letters in your language. Numbers and Symbols are not allowed). To go back enter anything else.");
 
-        return br.readLine();
+        return br.readLine().replaceAll("\\s+","");
     }
 
 
@@ -230,6 +246,9 @@ public class View {
         if (isTranslator) {
 
             System.out.println("\nTo Translate the word, type the language. ");
+        } else {
+
+            System.out.println();
         }
         System.out.print("Enter anything to go back.\n");
 
