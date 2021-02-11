@@ -5,7 +5,7 @@
 
 ### Step 1: Clone the project.
 
-Open IntelliJ, click "Get from VCS", paste repository url, select your path to save project into and click "clone".
+Open IntelliJ, click "Get from VCS", paste repository url (https://github.com/fuhrthom/TranslationMemory_Thomas_Fuhr.git), select your path to save project into and click "clone".
 
 1:
 ![alt text](https://github.com/fuhrthom/TranslationMemory_Thomas_Fuhr/blob/master/getFromVCS1.pdf)
