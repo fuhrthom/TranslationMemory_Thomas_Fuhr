@@ -8,7 +8,7 @@
 Open IntelliJ, click "Get from VCS", paste repository url, select your path to save project into and click "clone".
 
 
-
+![alt text](https://github.com/fuhrthom/TranslationMemory_Thomas_Fuhr/blob/master/getFromVCS1.pdf)
 
 
 Zu benoten sind:
