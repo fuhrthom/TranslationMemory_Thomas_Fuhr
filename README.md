@@ -28,7 +28,8 @@ Go to the "public static main"-method and click the play button on the left side
 
 ### Diagrams.
 
-[Activitydiagram]()
-[Classdiagram]()
+[Use-Case-Diagram](https://github.com/fuhrthom/TranslationMemory_Thomas_Fuhr/blob/master/TranslationMemory_UseCase_Thomas_Fuhr.png)
+[Activitydiagram](https://github.com/fuhrthom/TranslationMemory_Thomas_Fuhr/blob/master/Activity_Diagram_Login.png)
+[Classdiagram](https://github.com/fuhrthom/TranslationMemory_Thomas_Fuhr/blob/master/Classdiagramm_Thomas_Fuhr.png)
 
 ## Enjoy!
